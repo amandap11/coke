@@ -1,20 +1,14 @@
 /* Exercise 6: Make it modular */
-var path = require('path');
-
 var filterDir = require('./modularFilteredLs');
 var dirName = process.argv[2];
-var extension = '.' + process.argv[3];
+var extension = process.argv[3];
 
-function filterExtname(err, data){
-    if (err){
+filterDir(dirName, extension, function(err, list){
+    if(err){
         throw err;
     }
 
-    data.forEach(function(item){
-        if(path.extname(item) === extension){
-            console.log(item);
-        }
+    list.forEach(function(file){
+        console.log(file);
     });
-}
-
-filterDir(dirName, extension, filterExtname);
+});
